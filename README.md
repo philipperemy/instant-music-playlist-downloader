@@ -2,6 +2,11 @@
 
 *Provide a TXT file where each line is a music and run a single script to download them all (mp3 from YouTube).*
 
+
+<p align="center">
+  <b>*.txt > *.mp3</b>
+</p>
+
 <p align="center">
   <img src="https://www.winxdvd.com/resource/pics/youtube-to-mp3.png" width="100"><br/>
 </p>
