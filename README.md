@@ -1,4 +1,4 @@
-# Instantly download any list of songs :violin:
+# Instantly Download any Playlist of Songs (IDPS) :violin:
 
 *Provide a TXT file where each line is a music and run a single script to download them all (mp3 from YouTube).*
 
