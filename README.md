@@ -59,7 +59,7 @@ Now that we have our `music.txt` at the root of the project, all what you have t
 
 ```
 python3 download.py
-``
+```
 
 This script will download all the musics in the playlist in the current folder. To check the progression, simply run:
 
