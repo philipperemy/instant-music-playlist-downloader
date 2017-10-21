@@ -67,6 +67,6 @@ This script will download all the musics in the playlist in the current folder. 
 tail -f /tmp/mylog
 ```
 
-# References:
+## References
 
 - [https://github.com/yask123/Instant-Music-Downloader](https://github.com/yask123/Instant-Music-Downloader)
