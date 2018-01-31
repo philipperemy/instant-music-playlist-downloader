@@ -66,10 +66,10 @@ python3 music_names_from_billboard.py
 
 ## Download the musics
 
-Now that we have our `music.txt` at the root of the project, all what you have to do is run:
+All what you have to do is to have a file listing the songs (one name per line) and specify the output directory, like this:
 
 ```
-python3 download.py
+python3 download.py list_songs/french_song_listing/songs.txt /tmp/music
 ```
 
 This script will download all the musics in the playlist in the current folder. To check the progression, simply run:
