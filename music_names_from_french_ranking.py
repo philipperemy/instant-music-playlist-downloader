@@ -24,25 +24,23 @@ def start():
 
 def download(initial_url, fp_write):
     num_records = 0
-    current_html = get_soup(initial_url)
-    while True:
-        info_list = current_html.find_all('div', {'class': 'infos'})
+    y_list = list(range(2001, 2019))
+    w_list = list(range(1, 53))
+    print(y_list)
+    print(w_list)
+    for y in y_list:
+        for w in w_list:
+            current_html = get_soup(initial_url + f'?ye={y}&we={w}')
+            info_list = current_html.find_all('div', {'class': 'infos'})
 
-        for info in info_list:
-            artist = str(info.find(None, {'class': 'artist'}).contents[0])
-            title = str(info.find(None, {'class': 'title'}).contents[0])
-            company = str(info.find(None, {'class': 'company'}).contents[0])
-            print(f'{num_records} {artist} {title} {company}')
-            fp_write.write(f'{artist} {title}\n')
-            fp_write.flush()
-            num_records += 1
-
-        try:
-            next_link = current_html.find('nav', {'class': 'table-top-navigation'}).find_all('a')[0].attrs['href']
-            current_html = get_soup(next_link)
-        except:
-            print('Could not find next link. Aborting.')
-            return
+            for info in info_list:
+                artist = str(info.find(None, {'class': 'artist'}).contents[0])
+                title = str(info.find(None, {'class': 'title'}).contents[0])
+                company = str(info.find(None, {'class': 'company'}).contents[0])
+                print(f'{num_records} {artist} {title} {company}')
+                fp_write.write(f'{artist} {title}\n')
+                fp_write.flush()
+                num_records += 1
 
 
 if __name__ == '__main__':
