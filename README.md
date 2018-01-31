@@ -58,7 +58,7 @@ I provide a script to download the [Billboard TOP 100 - Per Year](http://billboa
 to build a playlist of roughly 2000 popular musics:
 
 ```
-python3 music_names.py
+python3 music_names_from_billboard.py
 ```
 
 ## Download the musics
