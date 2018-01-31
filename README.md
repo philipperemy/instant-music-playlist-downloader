@@ -25,7 +25,7 @@ Beforehand, please follow the instructions here: [https://github.com/yask123/Ins
 
 The command `instantmusic` should now work in your bash environment.
 
-Additionally, run those commands (those are for python3):
+Additionally, run those commands:
 
 ```
 git clone https://github.com/philipperemy/instant-music-playlist-downloader.git
