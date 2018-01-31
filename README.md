@@ -30,7 +30,9 @@ Additionally, run those commands (those are for python3):
 ```
 git clone https://github.com/philipperemy/instant-music-playlist-downloader.git
 cd instant-music-playlist-downloader
-pip3 install -r requirements.txt
+virtualenv -p python3 v
+source v/bin/activate
+python3.6 -m pip install -r requirements.txt
 ```
 
 ## Download a playlist
@@ -58,6 +60,7 @@ I provide a script to download the [Billboard TOP 100 - Per Year](http://billboa
 to build a playlist of roughly 2000 popular musics:
 
 ```
+cd list_songs
 python3 music_names_from_billboard.py
 ```
 
