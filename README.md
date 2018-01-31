@@ -37,7 +37,7 @@ python3.6 -m pip install -r requirements.txt
 
 ## Download a playlist
 
-A playlist is a TXT file named `music.txt` at the root of the project. For example, this is a playlist:
+A playlist is a TXT file containing one song (artist and name) per line. For example, this is a playlist:
 
 ```
 instant-music-playlist-downloader % head music.txt
