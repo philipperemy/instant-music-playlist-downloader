@@ -34,13 +34,16 @@ def download(initial_url, fp_write):
             info_list = current_html.find_all('div', {'class': 'infos'})
 
             for info in info_list:
-                artist = str(info.find(None, {'class': 'artist'}).contents[0])
-                title = str(info.find(None, {'class': 'title'}).contents[0])
-                company = str(info.find(None, {'class': 'company'}).contents[0])
-                print(f'{num_records} {artist} {title} {company}')
-                fp_write.write(f'{artist} {title}\n')
-                fp_write.flush()
-                num_records += 1
+                try:
+                    artist = str(info.find(None, {'class': 'artist'}).contents[0])
+                    title = str(info.find(None, {'class': 'title'}).contents[0])
+                    # company = str(info.find(None, {'class': 'company'}).contents[0])
+                    # print(f'{num_records} {artist} {title} {company}')
+                    fp_write.write(f'{artist} {title}\n')
+                    fp_write.flush()
+                    num_records += 1
+                except:
+                    print(f'Invalid record {info}. Skipping.')
 
 
 if __name__ == '__main__':
