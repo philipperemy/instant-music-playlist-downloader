@@ -1,3 +1,5 @@
-requests==2.18.3
-pexpect==4.2.1
-beautifulsoup4==4.6.0
+requests
+pexpect
+beautifulsoup4
+instantmusic
+lxml

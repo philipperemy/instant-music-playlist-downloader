@@ -33,7 +33,8 @@ def download(initial_url, fp_write):
             try:
                 url = initial_url + f'?ye={y}&we={w}'
                 current_html = get_soup(url)
-            except:
+            except Exception as e:
+                print(e)
                 print(f'Invalid URL {url}. Skipping.')
                 continue
 
@@ -54,3 +55,4 @@ def download(initial_url, fp_write):
 if __name__ == '__main__':
     assert len(sys.argv) == 3, 'Please provide the URL as argument and the output file.'
     download(sys.argv[1], open(sys.argv[2], 'w'))
+
