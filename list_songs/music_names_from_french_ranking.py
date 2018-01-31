@@ -30,9 +30,14 @@ def download(initial_url, fp_write):
     print(w_list)
     for y in y_list:
         for w in w_list:
-            current_html = get_soup(initial_url + f'?ye={y}&we={w}')
-            info_list = current_html.find_all('div', {'class': 'infos'})
+            try:
+                url = initial_url + f'?ye={y}&we={w}'
+                current_html = get_soup(url)
+            except:
+                print(f'Invalid URL {url}. Skipping.')
+                continue
 
+            info_list = current_html.find_all('div', {'class': 'infos'})
             for info in info_list:
                 try:
                     artist = str(info.find(None, {'class': 'artist'}).contents[0])
