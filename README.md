@@ -66,13 +66,13 @@ python3 music_names_from_billboard.py
 
 ## Download the musics
 
-All what you have to do is to have a file listing the songs (one name per line) and specify the output directory, like this:
+Have a file listing the songs (one name per line) ready and specify the output directory:
 
 ```
 python3 download.py list_songs/french_song_listing/songs.txt /tmp/music
 ```
 
-This script will download all the musics in the playlist in the current folder. To check the progression, simply run:
+This script will download all the musics contained in this playlist in the target directory. To check the logs, simply run:
 
 ```
 tail -f /tmp/mylog
