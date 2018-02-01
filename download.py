@@ -1,7 +1,7 @@
+import os
 import sys
 from time import sleep
 
-import os
 import pexpect
 from pexpect.exceptions import ExceptionPexpect
 
@@ -17,7 +17,7 @@ def get_music(name='Linkin Park papercut'):
     child.sendline('0')
     child.expect('Download*')
     child.sendline('y')
-    child.expect(['Fixed*', 'couldnt get album art*'])
+    child.expect(['Fixed*', 'couldnt get album art*'], timeout=120)
 
 
 def run(song_filename, output_folder):
