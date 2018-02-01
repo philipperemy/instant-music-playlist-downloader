@@ -6,6 +6,7 @@ __pycache__/
 .DS_Store
 v
 
+*.part
 *.tsv
 *.tar.gz
 *out*

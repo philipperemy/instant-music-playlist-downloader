@@ -17,7 +17,7 @@ def get_music(name='Linkin Park papercut'):
     child.sendline('0')
     child.expect('Download*')
     child.sendline('y')
-    child.expect(['Fixed*', 'couldnt get album art*'], timeout=120)
+    child.expect(['Fixed*', 'couldnt get album art*'], timeout=240)
 
 
 def run(song_filename, output_folder):
