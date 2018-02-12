@@ -5,7 +5,7 @@ from glob import glob
 from pydub import AudioSegment
 from tqdm import tqdm
 
-assert len(sys.argv) == 2, 'Please specify the output as parameter.'
+assert len(sys.argv) == 2, 'Please specify the input as parameter.'
 
 INPUT_DIR = sys.argv[1]  # Music dir from download.py script
 OUTPUT_BIT_RATE = '192k'
