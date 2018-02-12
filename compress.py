@@ -14,6 +14,7 @@ OUTPUT_DIR = 'converted_music_' + OUTPUT_BIT_RATE + '_' + OUTPUT_FORMAT
 
 if __name__ == '__main__':
 
+    print(f'Input dir is {INPUT_DIR}')
     print(f'Output dir is {OUTPUT_DIR}')
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
