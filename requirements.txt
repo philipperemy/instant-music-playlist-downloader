@@ -1,3 +1,5 @@
+tqdm
+pydub
 requests
 pexpect
 beautifulsoup4

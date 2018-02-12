@@ -26,7 +26,6 @@ if __name__ == '__main__':
 
         if not os.path.isfile(output_filename):
             music_fp = AudioSegment.from_file(music)
-            # music_fp = music_fp.set_frame_rate(16000)
 
             if music_fp.duration_seconds > 1000:  # >16min
                 continue
