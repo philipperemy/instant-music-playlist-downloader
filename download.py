@@ -44,7 +44,7 @@ def run(song_filename, output_folder):
         while num_attempts < 3:
             try:
                 printable_music = music.strip()
-                print('Downloading {0}'.format(printable_music))
+                print('Downloading {0}.'.format(printable_music))
                 get_music(printable_music)
 
                 # print(glob('*.mp3'))
