@@ -55,11 +55,19 @@ Now that we have our playlist file ready (file with one song per line), we can r
 python download.py list_songs/music.txt output_music/
 ```
 
-This script will download all the musics contained in this playlist in the target directory `output_music/`. To check the progress, simply run:
+This script will download all the musics contained in this playlist in the target directory `output_music/`. To have a fine-grained logging, simply run:
 
 ```
 tail -f /tmp/mylog
 ```
+
+The script incorporates a pause and resume feature. If you want to restart from the beginning or process another playlist, just run:
+
+```
+rm persistence.txt
+```
+
+
 
 ## References
 
