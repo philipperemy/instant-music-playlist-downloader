@@ -37,24 +37,7 @@ pip install -r requirements.txt
 
 ## Download a playlist
 
-A playlist is a TXT file containing one song (artist and name) per line. For example, this is a playlist:
-
-```
-instant-music-playlist-downloader % head music.txt
-```
-
-```
-Coolio Gangstas Paradise
-TLC Waterfalls
-TLC Creep
-Seal Kiss From A Rose
-Boyz II Men On Bended Knee
-Real McCoy Another Night
-Mariah Carey Fantasy
-Madonna Take A Bow
-Monica Dont Take It Personal (Just One Of Dem Days)
-Montell Jordan This Is How We Do It
-```
+A playlist is a TXT file containing one song (artist and name) per line. For example, this is a playlist: [songs.txt](examples/songs.txt).
 
 I provide a script to download the [Billboard TOP 100 - Per Year](http://billboardtop100of.com/). Just run the following command
 to build a playlist of roughly 2000 popular musics:
