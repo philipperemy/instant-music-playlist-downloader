@@ -1,19 +1,20 @@
 # http://billboardtop100of.com/1989-2/
-import string
-
 import requests
+import string
 from bs4 import BeautifulSoup
 
 printable = set(string.printable)
 
-music_names = open('music.txt', 'w')
+output_filename = 'music.txt'
+print('Writing to {}.'.format(output_filename))
+music_names = open(output_filename, 'w')
 
 for year in range(1995, 2017):
 
     if year == 2013:
         continue
 
-    print(year)
+    print('Downloading for {}.'.format(year))
     response = requests.get('http://billboardtop100of.com/{0}-2/'.format(year))
     assert response.status_code == 200
     soup = BeautifulSoup(response.content, 'lxml')

@@ -1,11 +1,15 @@
-import os
 import sys
 from time import sleep
 
+import os
 import pexpect
+import shutil
+from glob import glob
 from pexpect.exceptions import ExceptionPexpect
 
 PERSISTENCE_FILENAME = 'persistence.txt'
+
+KEYWORDS_TO_FILTER_OUT = ['album complet', 'compil', 'full album', 'compilation', 'full ep', 'full']
 
 
 def get_music(name='Linkin Park papercut'):
@@ -42,7 +46,15 @@ def run(song_filename, output_folder):
                 printable_music = music.strip()
                 print('Downloading {0}'.format(printable_music))
                 get_music(printable_music)
-                os.system('mv *.mp3 {}'.format(output_folder))
+
+                # print(glob('*.mp3'))
+                for mp3_music in glob('*.mp3'):
+                    for keyword_to_filter in KEYWORDS_TO_FILTER_OUT:
+                        if keyword_to_filter.lower() in mp3_music.lower():
+                            print('Music filtered {}.'.format(mp3_music))
+                            os.remove(mp3_music)
+                            continue
+                    shutil.move(mp3_music, output_folder + '/')
                 break
             except ExceptionPexpect:  # also check pexpect.exceptions.TIMEOUT: Timeout exceeded.
                 num_attempts += 1
