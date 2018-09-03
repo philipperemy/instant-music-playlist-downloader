@@ -64,7 +64,7 @@ tail -f /tmp/mylog
 The script incorporates a pause and resume feature. If you want to restart from the beginning or process another playlist, just run:
 
 ```
-rm persistence.txt
+rm -rf persistence.txt output_music
 ```
 
 
