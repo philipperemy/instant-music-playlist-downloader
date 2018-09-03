@@ -30,9 +30,9 @@ Additionally, run those commands:
 ```
 git clone https://github.com/philipperemy/instant-music-playlist-downloader.git
 cd instant-music-playlist-downloader
-virtualenv -p python3 v
+virtualenv -p python3.6 v
 source v/bin/activate
-python3.6 -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Download a playlist
