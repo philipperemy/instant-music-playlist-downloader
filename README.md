@@ -27,7 +27,7 @@ The command `instantmusic` should now work in your bash environment.
 
 Additionally, run those commands:
 
-```
+```bash
 git clone https://github.com/philipperemy/instant-music-playlist-downloader.git
 cd instant-music-playlist-downloader
 virtualenv -p python3.6 v
@@ -42,7 +42,7 @@ A playlist is a TXT file containing one song (artist and name) per line. For exa
 I provide a script to download the [Billboard TOP 100 - Per Year](http://billboardtop100of.com/). Just run the following command
 to build a playlist of roughly 2000 popular musics:
 
-```
+```bash
 cd list_songs
 python music_names_from_billboard.py
 ```
@@ -51,19 +51,19 @@ python music_names_from_billboard.py
 
 Now that we have our playlist file ready (file with one song per line), we can run the download by:
 
-```
+```bash
 python download.py list_songs/music.txt output_music/
 ```
 
 This script will download all the musics contained in this playlist in the target directory `output_music/`. To have a fine-grained logging, simply run:
 
-```
+```bash
 tail -f /tmp/mylog
 ```
 
 The script incorporates a pause and resume feature. If you want to restart from the beginning or process another playlist, just run:
 
-```
+```bash
 rm -rf persistence.txt output_music
 ```
 
