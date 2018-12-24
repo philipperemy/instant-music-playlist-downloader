@@ -5,3 +5,5 @@ pexpect
 beautifulsoup4
 instantmusic
 lxml
+youtube-dl
+instantmusic

@@ -33,7 +33,7 @@ def run(song_filename, output_folder):
         os.makedirs(output_folder)
 
     current_index = int(open(PERSISTENCE_FILENAME, 'r').read())
-    musics = open(song_filename).readlines()
+    musics = open(song_filename, 'rb').read().decode('utf8').strip().split('\n')
     for i, music in enumerate(musics):
 
         if i < current_index:
@@ -44,7 +44,8 @@ def run(song_filename, output_folder):
         while num_attempts < 3:
             try:
                 printable_music = music.strip()
-                print('Downloading {0}.'.format(printable_music))
+                print(printable_music)
+                print(f'Downloading {printable_music}.')
                 get_music(printable_music)
 
                 # print(glob('*.mp3'))
