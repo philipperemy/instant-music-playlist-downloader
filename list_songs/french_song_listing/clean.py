@@ -1,6 +1,8 @@
 import editdistance
 from tqdm import tqdm
 
+# cat *.txt | awk '{print tolower($0)}' | sort | uniq > unique.txt
+
 with open('unique.txt', 'r', encoding='utf8') as r:
     lines = r.read().strip().split('\n')
 
