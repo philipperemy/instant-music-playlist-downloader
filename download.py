@@ -73,8 +73,8 @@ def run(song_filename, output_folder):
                 break
             except ExceptionPexpect:  # also check pexpect.exceptions.TIMEOUT: Timeout exceeded.
                 num_attempts += 1
-                logger.info(
-                    'Going to sleep. We received an exception from pexpect. Attempts = {0}'.format(num_attempts))
+                logger.info('Going to sleep. We received an exception from pexpect. '
+                            'Attempts = {0}'.format(num_attempts))
                 sleep(10)
         current_index += 1
         open(PERSISTENCE_FILENAME, 'w').write(str(current_index))
