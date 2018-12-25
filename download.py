@@ -76,7 +76,6 @@ def run(song_filename, output_folder):
                         logger.info(f'Could not find {mp3_music}. Skip this one.')
                         break
                     except shutil.Error:
-                        logger.exception('')
                         remove_mp3()
                         break
                 break
