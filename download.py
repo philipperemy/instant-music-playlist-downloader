@@ -54,7 +54,11 @@ def run(song_filename, output_folder):
                             print('Music filtered {}.'.format(mp3_music))
                             os.remove(mp3_music)
                             continue
-                    shutil.move(mp3_music, output_folder + '/')
+                    try:
+                        shutil.move(mp3_music, output_folder + '/')
+                    except FileNotFoundError:
+                        print(f'Could not find {mp3_music}. Skip this one.')
+                        break
                 break
             except ExceptionPexpect:  # also check pexpect.exceptions.TIMEOUT: Timeout exceeded.
                 num_attempts += 1
