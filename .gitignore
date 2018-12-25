@@ -17,6 +17,8 @@ credentials.json
 nohup.out
 *.out
 *.txt
+*.mp3
+*.webm
 
 # C extensions
 *.so
