@@ -29,8 +29,10 @@ def get_music(name='Linkin Park papercut'):
 
 
 def remove_mp3():
-    for mu in glob('*.mp3'):
-        os.remove(mu)
+    for f in glob('*.mp3'):
+        os.remove(f)
+    for f in glob('*.webm'):
+        os.remove(f)
 
 
 def run(song_filename, output_folder):
@@ -45,17 +47,18 @@ def run(song_filename, output_folder):
 
     current_index = int(open(PERSISTENCE_FILENAME, 'r').read())
     musics = open(song_filename, 'rb').read().decode('utf8').strip().split('\n')
-    for i, music in enumerate(tqdm(musics)):
+    bar = tqdm(musics)
+    for i, music in enumerate(bar):
 
         if i < current_index:
-            logger.info('already fetched.')
+            bar.set_description('Already fetched.')
             continue
 
         num_attempts = 0
         while num_attempts < 3:
             try:
                 printable_music = music.strip()
-                logger.info(f'Downloading {printable_music}.')
+                bar.set_description(f'Downloading <{printable_music.title()}>')
                 get_music(printable_music)
 
                 # logger.info(glob('*.mp3'))
@@ -84,6 +87,7 @@ def run(song_filename, output_folder):
                 sleep(10)
         current_index += 1
         open(PERSISTENCE_FILENAME, 'w').write(str(current_index))
+    bar.close()
 
 
 if __name__ == '__main__':
