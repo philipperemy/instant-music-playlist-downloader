@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 PERSISTENCE_FILENAME = 'persistence.txt'
 
-KEYWORDS_TO_FILTER_OUT = ['album complet', 'compil', 'full album', 'compilation', 'full ep', 'full']
+KEYWORDS_TO_FILTER_OUT = ['album complet', 'compil', 'full album', 'compilation', 'full ep']
 
 
 def get_music(name='Linkin Park papercut'):
