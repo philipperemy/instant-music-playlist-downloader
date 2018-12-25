@@ -7,6 +7,7 @@ import pexpect
 import shutil
 from glob import glob
 from pexpect.exceptions import ExceptionPexpect
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,11 @@ def get_music(name='Linkin Park papercut'):
     child.expect(['Fixed*', 'couldnt get album art*'], timeout=240)
 
 
+def remove_mp3():
+    for mu in glob('*.mp3'):
+        os.remove(mu)
+
+
 def run(song_filename, output_folder):
     if not os.path.isfile(PERSISTENCE_FILENAME):
         with open(PERSISTENCE_FILENAME, 'w') as w:
@@ -35,9 +41,11 @@ def run(song_filename, output_folder):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
+    remove_mp3()
+
     current_index = int(open(PERSISTENCE_FILENAME, 'r').read())
     musics = open(song_filename, 'rb').read().decode('utf8').strip().split('\n')
-    for i, music in enumerate(musics):
+    for i, music in enumerate(tqdm(musics)):
 
         if i < current_index:
             logger.info('already fetched.')
@@ -61,14 +69,12 @@ def run(song_filename, output_folder):
                         shutil.move(mp3_music, output_folder + '/')
                     except FileNotFoundError:
                         logger.exception('')
-                        for mu in glob('*.mp3'):
-                            os.remove(mu)
+                        remove_mp3()
                         logger.info(f'Could not find {mp3_music}. Skip this one.')
                         break
                     except shutil.Error:
                         logger.exception('')
-                        for mu in glob('*.mp3'):
-                            os.remove(mu)
+                        remove_mp3()
                         break
                 break
             except ExceptionPexpect:  # also check pexpect.exceptions.TIMEOUT: Timeout exceeded.

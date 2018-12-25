@@ -7,3 +7,4 @@ instantmusic
 lxml
 youtube-dl
 instantmusic
+tqdm
