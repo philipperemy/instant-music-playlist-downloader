@@ -1,11 +1,14 @@
 import sys
 from time import sleep
 
+import logging
 import os
 import pexpect
 import shutil
 from glob import glob
 from pexpect.exceptions import ExceptionPexpect
+
+logger = logging.getLogger(__name__)
 
 PERSISTENCE_FILENAME = 'persistence.txt'
 
@@ -37,32 +40,41 @@ def run(song_filename, output_folder):
     for i, music in enumerate(musics):
 
         if i < current_index:
-            print('already fetched.')
+            logger.info('already fetched.')
             continue
 
         num_attempts = 0
         while num_attempts < 3:
             try:
                 printable_music = music.strip()
-                print(f'Downloading {printable_music}.')
+                logger.info(f'Downloading {printable_music}.')
                 get_music(printable_music)
 
-                # print(glob('*.mp3'))
+                # logger.info(glob('*.mp3'))
                 for mp3_music in glob('*.mp3'):
                     for keyword_to_filter in KEYWORDS_TO_FILTER_OUT:
                         if keyword_to_filter.lower() in mp3_music.lower():
-                            print('Music filtered {}.'.format(mp3_music))
+                            logger.info('Music filtered {}.'.format(mp3_music))
                             os.remove(mp3_music)
                             continue
                     try:
                         shutil.move(mp3_music, output_folder + '/')
                     except FileNotFoundError:
-                        print(f'Could not find {mp3_music}. Skip this one.')
+                        logger.exception('')
+                        for mu in glob('*.mp3'):
+                            os.remove(mu)
+                        logger.info(f'Could not find {mp3_music}. Skip this one.')
+                        break
+                    except shutil.Error:
+                        logger.exception('')
+                        for mu in glob('*.mp3'):
+                            os.remove(mu)
                         break
                 break
             except ExceptionPexpect:  # also check pexpect.exceptions.TIMEOUT: Timeout exceeded.
                 num_attempts += 1
-                print('Going to sleep. We received an exception from pexpect. Attempts = {0}'.format(num_attempts))
+                logger.info(
+                    'Going to sleep. We received an exception from pexpect. Attempts = {0}'.format(num_attempts))
                 sleep(10)
         current_index += 1
         open(PERSISTENCE_FILENAME, 'w').write(str(current_index))
@@ -70,5 +82,9 @@ def run(song_filename, output_folder):
 
 if __name__ == '__main__':
     # get_music('Montell Jordan This Is How We Do It')
-    assert len(sys.argv) == 3, 'Specify a list of songs as txt file and the output folder for the songs.'
+    if len(sys.argv) != 3:
+        print('Specify a list of songs as txt file and the output folder for the songs.')
+        print('Example: python download.py list_songs/french_song_listing/top-radios-unique.txt output_music')
+        exit(1)
+    logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
     run(sys.argv[1], sys.argv[2])
