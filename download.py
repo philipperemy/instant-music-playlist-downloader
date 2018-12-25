@@ -81,7 +81,6 @@ def run(song_filename, output_folder):
 
 
 if __name__ == '__main__':
-    # get_music('Montell Jordan This Is How We Do It')
     if len(sys.argv) != 3:
         print('Specify a list of songs as txt file and the output folder for the songs.')
         print('Example: python download.py list_songs/french_song_listing/top-radios-unique.txt output_music')
