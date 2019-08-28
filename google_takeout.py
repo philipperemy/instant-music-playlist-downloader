@@ -9,6 +9,7 @@
 import json
 import os
 from argparse import ArgumentParser
+from collections import Counter
 from glob import glob
 from os.path import join
 from time import time
@@ -43,8 +44,8 @@ def check_if_music_already_exists(title: str, output_dir=''):
     return os.path.exists(join(output_dir, title) + '.mp3')
 
 
-def download_music_wrapper(title, video_id, output_dir):
-    print(title.ljust(100), video_id, end='')
+def download_music_wrapper(i, title, video_id, output_dir):
+    print(i, title.ljust(100), video_id, end='')
     start = time()
     if not check_if_music_already_exists(title, output_dir):
         download_music(video_id, output_dir)
@@ -60,19 +61,30 @@ def download_playlist(playlist_filename: str, output_dir: str):
     for video in playlist:
         title = video['snippet']['title'].strip()
         video_id = video['snippet']['resourceId']['videoId'].strip()
-        download_music_wrapper(title, video_id, output_dir)
+        download_music_wrapper(0, title, video_id, output_dir)
 
 
 def download_history(history_filename: str, output_dir: str):
     with open(history_filename, 'r', encoding='utf8') as r:
         history = json.load(r)
+    counter = Counter([t['titleUrl'] for t in history if 'titleUrl' in t])
+    # select videos with at least 2 personal views.
+    relevant_urls = [x for x, count in dict(counter).items() if count >= 2]
+    # only select unique videos in the history.
+    picks = {}
     for record in history:
+        if 'titleUrl' in record \
+                and record['titleUrl'] in relevant_urls \
+                and record['titleUrl'] not in picks:
+            picks[record['titleUrl']] = record
+    sub_history = list(picks.values())
+    for i, record in enumerate(sub_history):
         title = record['title'].strip()
         if 'titleUrl' in record:
             video_id = record['titleUrl'].split('=')[-1]
             if title.startswith('Watched '):
                 title = title.replace('Watched ', '')
-            download_music_wrapper(title, video_id, output_dir)
+            download_music_wrapper(i, title, video_id, output_dir)
         else:
             pass  # 'Watched a video that has been removed'
 
