@@ -5,7 +5,6 @@ from glob import glob
 
 from eyed3 import mp3
 from eyed3.id3 import ID3_V1_0
-from tqdm import tqdm
 
 
 def get_script_arguments():
@@ -15,6 +14,7 @@ def get_script_arguments():
     args.add_argument('--force', action='store_true', help='Delete results.')
     args.add_argument('--min_minutes', type=float, default=0.0, help='Lower cutoff threshold.')
     args.add_argument('--max_minutes', type=float, required=True, help='Upper cutoff threshold.')
+    args.add_argument('--dry_run', action='store_true', help='No copy.')
     return args.parse_args()
 
 
@@ -29,15 +29,18 @@ def main():
         print(f'{args.output_dir} already exists. Delete it first.')
         exit(1)
 
-    with tqdm(glob(args.input_dir + '/**/*.mp3', recursive=True)) as bar:
-        for input_filename in bar:
-            music_name = os.path.basename(input_filename)
-            bar.set_description(music_name)
-            output_filename = os.path.join(args.output_dir, music_name)
-            # just to avoid this warning: Invalid date: 20091201, we add version.
-            f = mp3.Mp3AudioFile(input_filename, version=ID3_V1_0)
-            if args.min_minutes * 60 < f.info.time_secs < args.max_minutes * 60:
+    for input_filename in glob(args.input_dir + '/**/*.mp3', recursive=True):
+        music_name = os.path.basename(input_filename)
+        output_filename = os.path.join(args.output_dir, music_name)
+        # just to avoid this warning: Invalid date: 20091201, we add version.
+        f = mp3.Mp3AudioFile(input_filename, version=ID3_V1_0)
+        if args.min_minutes * 60 < f.info.time_secs < args.max_minutes * 60:
+            print(f'KEEP {input_filename}.')
+            if not args.dry_run:
                 shutil.copy2(input_filename, output_filename)
+        else:
+            print(f'DELETE {input_filename}.')
+
     print('Completed.')
 
 
