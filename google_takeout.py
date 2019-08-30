@@ -32,6 +32,8 @@ def download_music(video_id: str, output_dir='', is_quiet=True):
         f'--extract-audio',
         f'--audio-format mp3',
         f'--audio-quality 0',
+        f'--embed-thumbnail',
+        f'--add-metadata',
         f'--output \'{output_dir}/%(title)s.%(ext)s\'',
         f'https://www.youtube.com' + '/watch?v=' + video_id]
     if is_quiet:
