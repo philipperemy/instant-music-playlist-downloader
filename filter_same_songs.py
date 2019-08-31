@@ -4,7 +4,6 @@ from argparse import ArgumentParser
 from glob import glob
 
 from eyed3 import id3
-from eyed3.id3 import ID3_ANY_VERSION
 
 
 def get_script_arguments():
@@ -26,7 +25,6 @@ def main():
     else:
         print(f'{args.output_dir} already exists. Delete it first.')
         exit(1)
-
     musics = {}
     keep_count = 0
     delete_count = 0
@@ -41,6 +39,8 @@ def main():
             musics[key] = 1.0
             print(f'KEEP {input_filename}.')
             keep_count += 1
+            if not args.dry_run:
+                shutil.copy2(input_filename, output_filename)
         else:
             print(f'DELETE {input_filename}.')
             delete_count += 1
