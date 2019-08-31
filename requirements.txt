@@ -8,3 +8,4 @@ lxml
 youtube-dl
 instantmusic
 tqdm
+python-magic-bin
